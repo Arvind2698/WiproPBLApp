@@ -1,4 +1,4 @@
-package JavaFundamentals.MiniProject;
+package employee;
 
 public class EmployeeInformation {
     public static void main(String[] args){
@@ -47,70 +47,5 @@ public class EmployeeInformation {
         if(!found){
             System.out.println("There is no employee with empid: "+empToSearch);
         }
-    }
-}
-
-class Employee{
-    private int empNo;
-    private String empName;
-    private String DOJ;
-    private String department;
-    private int basic;
-    private int HRA;
-    private int IT;
-    private DA designationCode;
-    private int netSalary;
-
-    public Employee(int empNo,String empName,String DOJ,String department,int basic,int HRA,int IT,DA designationCode){
-        this.empNo=empNo;
-        this.empName=empName;
-        this.DOJ=DOJ;
-        this.department=department;
-        this.basic=basic;
-        this.HRA=HRA;
-        this.IT=IT;
-        this.designationCode=designationCode;
-        this.generateSalary();
-    }
-    public void generateSalary(){
-        this.netSalary= this.basic+this.HRA+this.designationCode.getDAamount()-this.IT;
-    }
-    public int getEmpNo(){
-        return this.empNo;
-    }
-    public String getEmpName(){
-        return this.empName;
-    }
-    public String getDOJ(){
-        return this.DOJ;
-    }
-    public String getDepartment(){
-        return this.department;
-    }
-    public String getDesignation(){
-        return this.designationCode.getDesignation();
-    }
-    public int getNetSalary(){
-        return this.netSalary;
-    }
-}
-
-class DA{
-    private String DAcode;
-    private String designation;
-    private int DAamount;
-    public DA(String DAcode,String designation,int DAamount){
-        this.DAamount=DAamount;
-        this.DAcode=DAcode;
-        this.designation=designation;
-    }
-    public String getDAcode(){
-        return this.DAcode;
-    }
-    public String getDesignation(){
-        return this.designation;
-    }
-    public int getDAamount(){
-        return this.DAamount;
     }
 }
