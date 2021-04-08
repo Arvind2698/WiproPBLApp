@@ -1,15 +1,17 @@
 package accounts;
 
-import java.util.Scanner;
-
 public class SBAccount extends Account {
+	
+	private boolean NRI;
+	
+	public void setNRI(boolean NRI) {
+		this.NRI=NRI;
+	}
+	public boolean getNRI() {
+		return this.NRI;
+	}
+	
     public double calculateInterest(){
-        Scanner sc=new Scanner(System.in);
-        System.out.print("Enter the average amount in account: ");
-        double amount=sc.nextDouble();
-
-        System.out.print("Is this a NRI account(true/false): ");
-        boolean NRI=sc.nextBoolean();
 
         if(NRI){
             setInterestRate(6);
@@ -17,6 +19,6 @@ public class SBAccount extends Account {
             setInterestRate(4);
         }
 
-        return (getInterestRate()*(amount/100));
+        return (getInterestRate()*(this.getAmount()/100));
     }
 }
