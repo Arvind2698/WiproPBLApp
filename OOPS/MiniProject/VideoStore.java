@@ -8,57 +8,45 @@ public class VideoStore {
     public VideoStore(){
         this.store=new ArrayList<>();
     }
-    public void addVideo(Video v){
+    public boolean addVideo(Video v){
         store.add(v);
-        System.out.println("The video \""+v.getVideoName()+"\" has been successfully added to the inventory!!");
+        return true;
     }
 
-    public void doCheckOut(String name){
+    public boolean doCheckOut(String name){
         for(int i=0;i<store.size();i++){
             Video v=store.get(i);
             if(v.getVideoName().toLowerCase().equals(name.toLowerCase()) && v.getCheckoutStatus()==false){
                 v.doCheckOut();
-                System.out.println("The video \""+name+"\" has been successfully checked-out");
-                return;
+                return true;
             }
         }
-        System.out.println("The requested book is not available at the moment... Please try another book");
+        return false;
     }
-    public void doReturn(String name){
+    
+    public boolean doReturn(String name){
         for(int i=0;i<store.size();i++){
             Video v=store.get(i);
             if(v.getVideoName().toLowerCase().equals(name.toLowerCase()) && v.getCheckoutStatus()==true){
                 v.doReturn();
-                System.out.println("The video \""+name+"\" has been successfully returned");
-                return;
+                return true;
             }
         }
-        System.out.println("Please re-check the name of the entered book and try again");
+        return false;
     }
-    public void receiveRating(String name,int rating){
+    
+    public boolean receiveRating(String name,int rating){
         for(int i=0;i<store.size();i++){
             Video v=store.get(i);
             if(v.getVideoName().toLowerCase().equals(name.toLowerCase())){
                 v.setRating(rating);
-                System.out.println("The rating "+rating+"/10 has been successfully mapped to "+name+"\"");
-                return;
+                return true;
             }
         }
-        System.out.println("Please re-check the name of the entered book and try again");
+        return false;
     }
-    public void listInventory(){
-        System.out.println("---------------------------------------------------------------------------");
-        if(store.size()==0){
-            System.out.println("                No Videos Available                 ");
-        }else{
-            System.out.println("Video Name        |       Checked-out Status       |       Rating      ");
-            System.out.println("---------------------------------------------------------------------------");
-            for(int i=0;i<store.size();i++){
-                Video v=store.get(i);
-                System.out.println(v.getVideoName()+"             |       "+v.getCheckoutStatus()+"       |       "+v.getRating()+"/10");
-            }
-        }
-        System.out.println("---------------------------------------------------------------------------");
+    public ArrayList<Video> listInventory(){
+        return this.store;
     }
     public int getStoreSize(){
         return this.store.size();

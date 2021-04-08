@@ -39,7 +39,9 @@ public class VideoLauncher{
                         System.out.print("Enter the name of the Video you wish to add: ");
                         String name=sc.next();
                         Video v=new Video(name);
-                        store.addVideo(v);
+                        if(store.addVideo(v)) {
+                        	System.out.println("The video \""+v.getVideoName()+"\" has been successfully added to the inventory!!");
+                        }
                         break;
                     case 2:
                         if(store.getStoreSize()==0){
@@ -48,7 +50,12 @@ public class VideoLauncher{
                             store.listInventory();
                             System.out.print("Enter the name of the Video you wish to check-out: ");
                             String videoName=sc.next();
-                            store.doCheckOut(videoName);
+                            
+                            if(store.doCheckOut(videoName)) {
+                            	System.out.println("The video \""+videoName+"\" has been successfully checked-out");
+                            }else {
+                            	System.out.println("The requested book is not available at the moment... Please try another book");
+                            }
                         }
                         break;
                     case 3:
@@ -57,7 +64,11 @@ public class VideoLauncher{
                         }else{
                             System.out.print("Enter the name of the Video you wish to return: ");
                             String videoName=sc.next();
-                            store.doReturn(videoName);
+                            if(store.doReturn(videoName)) {
+                            	System.out.println("The video \""+videoName+"\" has been successfully returned");
+                            }else {
+                            	System.out.println("Please re-check the name of the entered book and try again");
+                            }
                         }
                         break;
                     case 4:
@@ -68,7 +79,11 @@ public class VideoLauncher{
                             System.out.print("Enter the rating you wish to give "+videoName+" : ");
                             rating=sc.nextInt();
                             if(rating>=0 && rating<=10){
-                                store.receiveRating(videoName, rating);
+                                if(store.receiveRating(videoName, rating)) {
+                                	 System.out.println("The rating "+rating+"/10 has been successfully mapped to "+videoName+"\"");
+                                }else {
+                                	System.out.println("Please re-check the name of the entered book and try again");
+                                }
                                 break;
                             }else{
                                 System.out.println("Please provide a rating between 0 and 10");
@@ -76,7 +91,19 @@ public class VideoLauncher{
                         }
                         break;
                     case 5:
-                        store.listInventory();
+                        ArrayList<Video> getStore=store.listInventory();
+                        System.out.println("---------------------------------------------------------------------------");
+                        if(getStore.size()==0){
+                            System.out.println("                No Videos Available                 ");
+                        }else{
+                            System.out.println("Video Name        |       Checked-out Status       |       Rating      ");
+                            System.out.println("---------------------------------------------------------------------------");
+                            for(int i=0;i<getStore.size();i++){
+                                Video vGet=getStore.get(i);
+                                System.out.println(vGet.getVideoName()+"             |       "+vGet.getCheckoutStatus()+"       |       "+vGet.getRating()+"/10");
+                            }
+                        }
+                        System.out.println("---------------------------------------------------------------------------");
                         break;
                     default :
                 }
